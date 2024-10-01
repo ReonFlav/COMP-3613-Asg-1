@@ -191,3 +191,33 @@ If you are running into errors in gitpod when updateding your github actions fil
 ## Database Issues
 
 If you are adding models you may need to migrate the database with the commands given in the previous database migration section. Alternateively you can delete you database file.
+
+# Commands
+@app.cli.command("create-job")
+def create_job_cli():
+    title = input("Job Title: ")
+    description = input("Job Description: ")
+    company = input("Company: ")
+    create_job(title, description, company)
+    print("Job created!")
+
+@app.cli.command("view-jobs")
+def view_jobs_cli():
+    jobs = view_jobs()
+    for job in jobs:
+        print(f"ID: {job.id}, Title: {job.title}, Company: {job.company}")
+
+@app.cli.command("apply-job")
+def apply_job_cli():
+    job_id = int(input("Job ID: "))
+    name = input("Your Name: ")
+    resume = input("Your Resume: ")
+    apply_to_job(job_id, name, resume)
+    print("Application submitted!")
+
+@app.cli.command("view-applicants")
+def view_applicants_cli():
+    job_id = int(input("Job ID: "))
+    applicants = view_applicants(job_id)
+    for applicant in applicants:
+        print(f"Applicant ID: {applicant.applicant_id}, Status: {applicant.status}")
