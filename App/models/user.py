@@ -1,11 +1,24 @@
 from werkzeug.security import check_password_hash, generate_password_hash
 from App.database import db
 
-class User(db.Model):
+"""class Job(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    username =  db.Column(db.String(20), nullable=False, unique=True)
-    password = db.Column(db.String(120), nullable=False)
+    title = db.Column(db.String(100), nullable=False)
+    description = db.Column(db.Text, nullable=False)
+    company = db.Column(db.String(100), nullable=False)
 
+class Applicant(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100), nullable=False)
+    resume = db.Column(db.Text, nullable=True)
+
+class Application(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    job_id = db.Column(db.Integer, db.ForeignKey('job.id'), nullable=False)
+    applicant_id = db.Column(db.Integer, db.ForeignKey('applicant.id'), nullable=False)
+    status = db.Column(db.String(50), default='Applied')"""
+
+class User():
     def __init__(self, username, password):
         self.username = username
         self.set_password(password)
@@ -17,8 +30,8 @@ class User(db.Model):
         }
 
     def set_password(self, password):
-        """Create hashed password."""
-        self.password = generate_password_hash(password)
+       """Create hashed password."""
+       self.password = generate_password_hash(password)
     
     def check_password(self, password):
         """Check hashed password."""
